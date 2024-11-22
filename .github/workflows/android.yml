@@ -23,15 +23,19 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Create output directory if it does not exist
+      run: mkdir -p ./app/build/outputs/apk/release
     - name: Build with Gradle
       run: ./gradlew app:assembleRelease
+    - name: List build directory
+      run: ls -R ./app/build/outputs/apk/release
     - name: Upload 32-bit APK
-      uses: actions/upload-artifact@v4  # 使用 v4 版本
+      uses: actions/upload-artifact@v4
       with:
         name: ProtoHax-build-32bit-${{ github.sha }}
         path: ./app/build/outputs/apk/release/app-armeabi-v7a-release.apk
     - name: Upload 64-bit APK
-      uses: actions/upload-artifact@v4  # 使用 v4 版本
+      uses: actions/upload-artifact@v4
       with:
         name: ProtoHax-build-64bit-${{ github.sha }}
         path: ./app/build/outputs/apk/release/app-arm64-v8a-release.apk
