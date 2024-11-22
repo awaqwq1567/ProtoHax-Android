@@ -1,7 +1,10 @@
 name: Android CI
 
 on:
-  push
+  push:
+    branches:
+      - stable
+  workflow_dispatch:   # 添加手动触发事件
 
 jobs:
   build:
